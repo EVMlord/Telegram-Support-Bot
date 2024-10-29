@@ -1,5 +1,5 @@
 import { VercelRequest, VercelResponse } from "@vercel/node";
-import bot from "..";
+import bot from "../src";
 
 export default async (req: VercelRequest, res: VercelResponse) => {
   try {
