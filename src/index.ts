@@ -11,7 +11,7 @@ import { setup as setupDatabase } from "./database";
 
 export const projectUsername = process.env.PROJECT_USERNAME || "";
 
-async function init() {
+async function initBot() {
   try {
     // Setup middlewares
     middlewares.setup(bot);
@@ -28,8 +28,15 @@ async function init() {
     // Configure bot to parse HTML in messages
     bot.api.config.use(parseMode("HTML"));
 
-    // Start the bot
-    await bot.start();
+    // Conditionally start bot with long polling in development
+    if (process.env.NODE_ENV === "development") {
+      await bot.start({
+        allowed_updates: ["chat_member", "message", "message_reaction"],
+      });
+      logger.info("Bot started in development mode with long polling");
+    } else {
+      logger.info("Bot initialized for webhook mode (production)");
+    }
 
     logger.info("Bot started successfully");
   } catch (error) {
@@ -38,4 +45,10 @@ async function init() {
   }
 }
 
-init();
+// Initialize the bot within an immediately invoked async function
+(async () => {
+  await initBot();
+})();
+
+// Export the initialized bot for use in Vercel functions
+export default bot;
