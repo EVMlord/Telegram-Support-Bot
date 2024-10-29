@@ -1,11 +1,11 @@
 {
   "version": 2,
   "functions": {
-    "/api/bot.ts": {
+    "api/bot.ts": {
       "memory": 1024,
       "maxDuration": 10
     },
-    "/api/setup.ts": {
+    "api/setup.ts": {
       "memory": 1024,
       "maxDuration": 10
     }
