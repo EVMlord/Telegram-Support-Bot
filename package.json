@@ -1,0 +1,32 @@
+{
+  "name": "telegram-support-bot",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "repository": "https://github.com/EVMlord/Telegram-Support-Bot.git",
+  "author": "EVMlord <85406816+EVMlord@users.noreply.github.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "node dist/index.js",
+    "build": "tsc && cpx \"src/locales/**/*\" dist/locales",
+    "dev": "ts-node src/index.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^22.8.1",
+    "cpx": "^1.5.0",
+    "ts-node": "^10.9.2"
+  },
+  "dependencies": {
+    "@fluent/bundle": "^0.18.0",
+    "@grammyjs/i18n": "^1.1.2",
+    "@grammyjs/menu": "^1.2.2",
+    "@grammyjs/parse-mode": "^1.10.0",
+    "@grammyjs/ratelimiter": "^1.2.0",
+    "dotenv": "^16.4.5",
+    "grammy": "^1.30.0",
+    "mysql2": "^3.11.3",
+    "sequelize": "^6.37.5",
+    "sequelize-typescript": "^2.1.6",
+    "typescript": "^5.6.3",
+    "winston": "^3.15.0"
+  }
+}
