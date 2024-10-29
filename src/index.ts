@@ -9,6 +9,8 @@ import { setupBotCommands } from "./helpers/bot-commands";
 import { logger } from "./helpers/logger";
 import { setup as setupDatabase } from "./database";
 
+export const projectUsername = process.env.PROJECT_USERNAME || "";
+
 async function init() {
   try {
     // Setup middlewares

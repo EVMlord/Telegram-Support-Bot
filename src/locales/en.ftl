@@ -1,8 +1,8 @@
 bot=
     .about=
-        🤖 A bot designed for easy communication with @EVMlord
+        🤖 A bot designed for easy communication with the @{ $username } team.
     .description=
-        📬 I’m here to help you reach out to @EVMlord smoothly
+        📬 I’m here to help you reach out to the @{ $username } team smoothly.
     .start=
         🚀 Let’s get started with the bot!
     .help=
@@ -10,13 +10,13 @@ bot=
 
 help=
     .dm=
-        👋 Hi there, <b>{ $name }</b>! I’m here to connect you with <a href="https://t.me/EVMlord">EVMlord</a>.
+        👋 Hi there, <b>{ $name }</b>! I’m here to connect you with <a href="https://t.me/{ $username }">{ $username }</a>.
 
         📝 Please provide details about your question, issue, or suggestion, and send it here.
     .group= 📢 This is the hub for receiving user messages. Just reply directly to them for quick responses.
 
 ban=
-    .no_reply= ⚠ You need to reply to a message to ban the user.
+    .no_reply= ⚠ You need to reply to a message to ban the user.   
     .done= 🚫 User has been successfully banned.
     .pardon= 😊 User has been successfully unbanned.
 
