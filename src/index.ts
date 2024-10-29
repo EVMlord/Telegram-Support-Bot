@@ -19,11 +19,11 @@ async function initBot() {
     // Setup handlers
     await setupHandlers(bot);
 
-    // Setup database
-    await setupDatabase();
-
     // Register bot commands
     await setupBotCommands(bot);
+
+    // Setup database
+    await setupDatabase();
 
     // Configure bot to parse HTML in messages
     bot.api.config.use(parseMode("HTML"));

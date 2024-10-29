@@ -13,7 +13,7 @@ if (
   throw Error("No DB provided");
 }
 
-const sequelize = new Sequelize(
+export const sequelize = new Sequelize(
   process.env.MYSQL_DATABASE,
   process.env.MYSQL_USERNAME,
   process.env.MYSQL_PASSWORD,
@@ -21,6 +21,7 @@ const sequelize = new Sequelize(
     host: process.env.MYSQL_HOST,
     port: process.env.MYSQL_PORT ? parseInt(process.env.MYSQL_PORT) : 3306,
     dialect: "mysql", // Use "mysql" for MariaDB/MySQL, change to "postgres" if using PostgreSQL
+    dialectModule: require("mysql2"), // Use 'mysql2' library explicitly
     logging: process.env.log === "debug",
   }
 );
