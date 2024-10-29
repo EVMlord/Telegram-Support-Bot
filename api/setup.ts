@@ -1,7 +1,10 @@
 import { VercelRequest, VercelResponse } from "@vercel/node";
 import bot from "../src";
 
-export default async (req: VercelRequest, res: VercelResponse) => {
+export default async function setupHandler(
+  req: VercelRequest,
+  res: VercelResponse
+) {
   try {
     // get host name from req
     const host = req.headers.host;
@@ -30,4 +33,4 @@ export default async (req: VercelRequest, res: VercelResponse) => {
     console.error("Error setting up webhook:", error);
     res.status(500).send("Error setting up webhook.");
   }
-};
+}
