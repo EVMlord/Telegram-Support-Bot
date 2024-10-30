@@ -8,21 +8,30 @@ async function errorHandler(err: BotError<MyContext>): Promise<void> {
 
   // Log general error information
   logger.error(`[!] Update ${ctx.update.update_id} by ${ctx.from?.id} failed!`);
+  console.error(
+    `[!] Update ${ctx.update.update_id} by ${ctx.from?.id} failed!`
+  );
   //   logger.error(`[!] Update ${ctx.update.update_id} by ${ctx.from?.id} failed!`);
 
   // Handle different error types with detailed logging
   if (e instanceof BotError) {
     // logger.error(`> BotError: ${e.ctx}`);
     logger.error(`> BotError: Context - ${JSON.stringify(e.ctx.update)}`);
+    console.error(`> BotError: Context - ${JSON.stringify(e.ctx.update)}`);
   } else if (e instanceof GrammyError) {
     logger.error(
       `> GrammyError: ${e.description} (Error Code: ${e.error_code})`
     );
+    console.error(
+      `> GrammyError: ${e.description} (Error Code: ${e.error_code})`
+    );
   } else if (e instanceof HttpError) {
     logger.error(`> HttpError: ${e.name} - ${e.message}`);
+    console.error(`> HttpError: ${e.name} - ${e.message}`);
     // logger.error(`> HttpError: ${e}`);
   } else {
     logger.error(`> Unknown Error: ${e}`);
+    console.error(`> Unknown Error: ${e}`);
   }
 
   // Attempt to notify the user of an unknown error
@@ -33,6 +42,7 @@ async function errorHandler(err: BotError<MyContext>): Promise<void> {
     );
   } catch (replyError) {
     logger.error("> Failed to send error reply to user.");
+    console.error("> Failed to send error reply to user.");
   }
 }
 

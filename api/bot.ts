@@ -29,6 +29,8 @@ export default async function botHandler(
   req: VercelRequest,
   res: VercelResponse
 ) {
+  console.log("Webhook received an update");
+
   // Initialize bot if not already initialized
   if (!bot.isInited()) {
     await bot.init();
@@ -55,7 +57,11 @@ export default async function botHandler(
     // const compatibleRes = createCompatibleResponse(res);
 
     // return handleUpdate(compatibleReq, compatibleRes);
-    return handleUpdate(req, res);
+    await handleUpdate(req, res);
+
+    console.log("Finished processing update");
+
+    return;
   } else {
     res.status(405).send("Method Not Allowed");
   }
