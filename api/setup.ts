@@ -8,9 +8,9 @@ export default async function setupHandler(
   try {
     // get host name from .env or req
     const customDomain = process.env.CUSTOM_DOMAIN;
-    const host = customDomain ? customDomain : req.headers.host;
-
-    console.log({ forwardedHost: req.headers["x-forwarded-host"] });
+    const host = customDomain
+      ? customDomain
+      : (req.headers["x-forwarded-host"] as string); // x-forwarded-host contains custom domain from vercel
 
     const webhookUrl = `https://${host}/api/bot`;
 
