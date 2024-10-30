@@ -13,6 +13,10 @@ export const projectUsername = process.env.PROJECT_USERNAME || "";
 
 async function initBot() {
   try {
+    // Setup database first
+    await setupDatabase();
+    logger.info("Database initialized and models synced successfully.");
+
     // Setup middlewares
     middlewares.setup(bot);
 
@@ -21,9 +25,6 @@ async function initBot() {
 
     // Register bot commands
     await setupBotCommands(bot);
-
-    // Setup database
-    await setupDatabase();
 
     // Configure bot to parse HTML in messages
     bot.api.config.use(parseMode("HTML"));

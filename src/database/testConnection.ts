@@ -1,3 +1,6 @@
+// import dotenv from "dotenv";
+// dotenv.config(); // This will load environment variables from .env file
+
 import { sequelize } from ".";
 
 async function testConnection() {

@@ -9,6 +9,11 @@ export default async function botHandler(
   req: VercelRequest,
   res: VercelResponse
 ) {
+  // Initialize bot if not already initialized
+  if (!bot.isInited()) {
+    await bot.init();
+  }
+
   // Get the client IP
   const origin = (req.headers["x-forwarded-for"] ||
     req.socket.remoteAddress ||
