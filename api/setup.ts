@@ -6,22 +6,26 @@ export default async function setupHandler(
   res: VercelResponse
 ) {
   try {
-    // get host name from req
-    const host = req.headers.host;
+    // get host name from .env or req
+    const customDomain = process.env.CUSTOM_DOMAIN;
+    const host = customDomain ? customDomain : req.headers.host;
+
+    console.log({ forwardedHost: req.headers["x-forwarded-host"] });
+
     const webhookUrl = `https://${host}/api/bot`;
 
     // Set the webhook for Telegram
     await bot.api.setWebhook(webhookUrl, {
       allowed_updates: [
         "message",
-        // "channel_post",
+        "channel_post",
         "inline_query",
         "poll",
         "poll_answer",
         "my_chat_member",
         "chat_join_request",
-        // "chat_boost",
-        // "removed_chat_boost",
+        "chat_boost",
+        "removed_chat_boost",
         "chat_member",
         "message_reaction",
         "message_reaction_count",

@@ -8,9 +8,9 @@ export default async function mainHandler(
   res: VercelResponse
 ) {
   try {
-    // Home page: display server status
-    if (req.url === "/" || req.url === "/api") {
-      return statusHandler(res);
+    // Handle the `/bot` route for Telegram webhook
+    if (req.url === "/api/bot") {
+      return botHandler(req, res);
     }
 
     // Handle the `/setup` route to set the webhook
@@ -18,9 +18,10 @@ export default async function mainHandler(
       return setupHandler(req, res);
     }
 
-    // Handle the `/bot` route for Telegram webhook
-    if (req.url === "/api/bot") {
-      return botHandler(req, res);
+    // Home page: display server status
+    if (/^\/(api\/?)?$/.test(String(req.url))) {
+      // use regex to match /, /api and /api/
+      return statusHandler(res);
     }
 
     // Default response for undefined routes
