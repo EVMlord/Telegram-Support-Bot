@@ -51,6 +51,13 @@
   resolved "https://registry.yarnpkg.com/@fluent/langneg/-/langneg-0.6.2.tgz#95e5261c27c7f3cb6237deb62aa1b7006a9bd17d"
   integrity sha512-YF4gZ4sLYRQfctpUR2uhb5UyPUYY5n/bi3OaED/Q4awKjPjlaF8tInO3uja7pnLQcmLTURkZL7L9zxv2Z5NDwg==
 
+"@grammyjs/auto-retry@^2.0.2":
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/@grammyjs/auto-retry/-/auto-retry-2.0.2.tgz#8b3bfc869b128b818b1e22418418e1d75ca622fd"
+  integrity sha512-b4A4p5jlYDiQtW0c0FXYe11WMkYoiW+5rvOaDMCOk1h7Pu2SDl7B7gmFF8cthWCx2+M2nWLOsBxAgbBG4kKWYg==
+  dependencies:
+    debug "^4.3.4"
+
 "@grammyjs/i18n@^1.1.2":
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/@grammyjs/i18n/-/i18n-1.1.2.tgz#c0d3c4af3677b1c42d8ed0dd41d93e823b35bd86"
