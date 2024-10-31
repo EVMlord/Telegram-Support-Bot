@@ -6,9 +6,9 @@
   "author": "EVMlord <85406816+EVMlord@users.noreply.github.com>",
   "license": "MIT",
   "scripts": {
-    "start": "node dist/index.js",
-    "build": "tsc && cpx \"src/locales/**/*\" dist/locales",
-    "dev": "ts-node src/index.ts"
+    "start": "node dist/api/bot.js",
+    "build": "tsc && cpx \"src/locales/**/*\" dist/src/locales",
+    "dev": "ts-node src/api/bot.ts"
   },
   "devDependencies": {
     "@types/express": "^5.0.0",
