@@ -1,16 +1,13 @@
-import { IncomingMessage, ServerResponse } from "http";
+import { Request, Response } from "express";
 import bot from "../src";
 
-export default async function setupHandler(
-  req: IncomingMessage,
-  res: ServerResponse
-) {
+export default async function setupHandler(req: Request, res: Response) {
   try {
     // get host name from .env or req
     const customDomain = process.env.CUSTOM_DOMAIN;
     const host = customDomain
       ? customDomain
-      : (req.headers["x-forwarded-host"] as string); // x-forwarded-host contains custom domain from vercel
+      : ((req.headers["x-forwarded-host"] || req.headers.host) as string); // x-forwarded-host contains custom domain from vercel
 
     const webhookUrl = `https://${host}/api/bot`;
 
@@ -32,11 +29,9 @@ export default async function setupHandler(
       ],
     });
 
-    res.statusCode = 200;
-    res.end("Webhook set up successfully.");
+    res.status(200).send(`Webhook set to ${webhookUrl}`);
   } catch (error) {
     console.error("Error setting up webhook:", error);
-    res.statusCode = 500;
-    res.end("Error setting up webhook.");
+    res.status(500).send("Failed to set webhook");
   }
 }

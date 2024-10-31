@@ -49,6 +49,11 @@ async function initBot() {
 // Initialize the bot within an immediately invoked async function
 (async () => {
   await initBot();
+  // Initialize bot if not already initialized
+  if (!bot.isInited()) {
+    logger.info("Initializing bot!");
+    await bot.init();
+  }
 })();
 
 // Export the initialized bot for use in Vercel functions

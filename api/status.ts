@@ -1,11 +1,9 @@
-import { ServerResponse } from "http";
+import { Response } from "express";
 
-export default function statusHandler(res: ServerResponse) {
-  // using _ to indicate unused parameter
+export default function statusHandler(res: Response) {
+  // Set the headers and status code for the response
   res.setHeader("Content-Type", "text/html");
-  res.statusCode = 200;
-
-  res.end(`
+  res.status(200).send(`
     <!DOCTYPE html>
     <html lang="en">
     <head>

@@ -1,12 +1,9 @@
-import { IncomingMessage, ServerResponse } from "http";
+import { Request, Response } from "express";
 import statusHandler from "./status";
 import setupHandler from "./setup";
 import botHandler from "./bot";
 
-export default async function mainHandler(
-  req: IncomingMessage,
-  res: ServerResponse
-) {
+export default async function mainHandler(req: Request, res: Response) {
   try {
     // Handle the `/bot` route for Telegram webhook
     if (req.url === "/api/bot") {
@@ -25,11 +22,9 @@ export default async function mainHandler(
     }
 
     // Default response for undefined routes
-    res.statusCode = 404;
-    res.end("Not Found");
+    res.status(404).send("Not Found");
   } catch (error) {
     console.error("Error handling request:", error);
-    res.statusCode = 500;
-    res.end("Internal Server Error");
+    res.status(500).send("Internal Server Error");
   }
 }

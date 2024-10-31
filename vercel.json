@@ -4,14 +4,7 @@
     "api/bot.ts": {
       "memory": 1024,
       "maxDuration": 10
-    },
-    "api/index.ts": {
-      "memory": 1024,
-      "maxDuration": 10
     }
   },
-  "routes": [
-    { "src": "/api/bot", "dest": "api/bot.ts" },
-    { "src": "/*", "dest": "api/index.ts" }
-  ]
+  "routes": [{ "src": "/*", "dest": "api/bot.ts" }]
 }
