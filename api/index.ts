@@ -18,7 +18,7 @@ export default async function mainHandler(req: Request, res: Response) {
     // Home page: display server status
     if (/^\/(api\/?)?$/.test(String(req.url))) {
       // use regex to match /, /api and /api/
-      return statusHandler(res);
+      return statusHandler(req, res);
     }
 
     // Default response for undefined routes
