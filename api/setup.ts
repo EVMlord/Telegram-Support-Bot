@@ -1,9 +1,9 @@
-import { VercelRequest, VercelResponse } from "@vercel/node";
+import { IncomingMessage, ServerResponse } from "http";
 import bot from "../src";
 
 export default async function setupHandler(
-  req: VercelRequest,
-  res: VercelResponse
+  req: IncomingMessage,
+  res: ServerResponse
 ) {
   try {
     // get host name from .env or req
@@ -32,9 +32,11 @@ export default async function setupHandler(
       ],
     });
 
-    res.status(200).send("Webhook set up successfully.");
+    res.statusCode = 200;
+    res.end("Webhook set up successfully.");
   } catch (error) {
     console.error("Error setting up webhook:", error);
-    res.status(500).send("Error setting up webhook.");
+    res.statusCode = 500;
+    res.end("Error setting up webhook.");
   }
 }

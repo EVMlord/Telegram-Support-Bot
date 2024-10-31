@@ -1,9 +1,11 @@
-import { VercelResponse } from "@vercel/node";
+import { ServerResponse } from "http";
 
-export default function statusHandler(res: VercelResponse) {
+export default function statusHandler(res: ServerResponse) {
   // using _ to indicate unused parameter
   res.setHeader("Content-Type", "text/html");
-  res.status(200).send(`
+  res.statusCode = 200;
+
+  res.end(`
     <!DOCTYPE html>
     <html lang="en">
     <head>

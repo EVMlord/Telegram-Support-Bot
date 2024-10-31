@@ -1,11 +1,11 @@
-import { VercelRequest, VercelResponse } from "@vercel/node";
+import { IncomingMessage, ServerResponse } from "http";
 import statusHandler from "./status";
 import setupHandler from "./setup";
 import botHandler from "./bot";
 
 export default async function mainHandler(
-  req: VercelRequest,
-  res: VercelResponse
+  req: IncomingMessage,
+  res: ServerResponse
 ) {
   try {
     // Handle the `/bot` route for Telegram webhook
@@ -25,9 +25,11 @@ export default async function mainHandler(
     }
 
     // Default response for undefined routes
-    res.status(404).send("Not Found");
+    res.statusCode = 404;
+    res.end("Not Found");
   } catch (error) {
     console.error("Error handling request:", error);
-    res.status(500).send("Internal Server Error");
+    res.statusCode = 500;
+    res.end("Internal Server Error");
   }
 }
