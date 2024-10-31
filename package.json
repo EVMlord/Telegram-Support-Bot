@@ -8,7 +8,7 @@
   "scripts": {
     "start": "node dist/api/bot.js",
     "build": "tsc && cpx \"src/locales/**/*\" dist/src/locales",
-    "dev": "ts-node src/api/bot.ts"
+    "dev": "ts-node api/bot.ts"
   },
   "devDependencies": {
     "@types/express": "^5.0.0",

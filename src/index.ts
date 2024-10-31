@@ -42,7 +42,8 @@ async function initBot() {
     logger.info("Bot started successfully");
   } catch (error) {
     logger.error(`Bot initialization failed: ${error}`);
-    process.exit(1); // Exit with failure code if initialization fails
+    // No process.exit(1) here for serverless compatibility
+    // process.exit(1); // Exit with failure code if initialization fails
   }
 }
 
