@@ -1,8 +1,8 @@
-import { Response } from "express";
+import { Request, Response } from "express";
 
-export default function statusHandler(res: Response) {
-  // Set the headers and status code for the response
-  res.setHeader("Content-Type", "text/html");
+export default function statusHandler(_req: Request, res: Response) {
+  // Set the Content-Type header and send an HTML response
+  res.header("Content-Type", "text/html");
   res.status(200).send(`
     <!DOCTYPE html>
     <html lang="en">
