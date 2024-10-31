@@ -6,5 +6,9 @@
       "maxDuration": 10
     }
   },
-  "routes": [{ "src": "/*", "dest": "api/bot.ts" }]
+  "routes": [
+    { "src": "/setup", "dest": "api/bot.ts" },
+    { "src": "/api/bot", "dest": "api/bot.ts" },
+    { "src": "/*", "dest": "api/bot.ts" }
+  ]
 }

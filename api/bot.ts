@@ -40,7 +40,7 @@ function checkIP(req: Request, res: Response, next: NextFunction): void {
 }
 
 // Set up the webhook route with IP check
-app.post("/api/bot", checkIP, webhookCallback(bot, "express"));
+app.use("/api/bot", checkIP, webhookCallback(bot, "express"));
 
 // Handle the `/setup` route to set the webhook
 app.get("/setup", setupHandler);
