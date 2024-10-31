@@ -48,6 +48,6 @@ app.get("/setup", setupHandler);
 // Optional health check route (no IP restriction)
 app.get("/", statusHandler);
 
-// app.listen();
+app.listen();
 
 export default app;

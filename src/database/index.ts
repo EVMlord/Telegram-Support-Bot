@@ -36,36 +36,6 @@ export const sequelize = new Sequelize(
   }
 );
 
-// const retryOptions = {
-//   max: 3, // Retry up to 3 times
-//   timeout: 3000, // Wait 3 seconds between each retry
-// };
-
-// // Function to attempt connection with retry logic
-// async function connectWithRetry() {
-//   for (let i = 0; i < retryOptions.max; i++) {
-//     try {
-//       await sequelize.authenticate();
-//       console.log("Connection has been established successfully.");
-//       return; // If connection is successful, exit the loop
-//     } catch (error) {
-//       console.error(
-//         `Attempt ${i + 1} failed. Retrying in ${
-//           retryOptions.timeout / 1000
-//         } seconds...`
-//       );
-//       if (i < retryOptions.max - 1) {
-//         await new Promise((resolve) =>
-//           setTimeout(resolve, retryOptions.timeout)
-//         );
-//       } else {
-//         console.error("All retry attempts failed. Exiting...");
-//         throw error;
-//       }
-//     }
-//   }
-// }
-
 async function connectWithRetry() {
   let attempts = 0;
   const maxRetries = 3;
