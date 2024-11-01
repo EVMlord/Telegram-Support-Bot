@@ -5,6 +5,15 @@ import { webhookCallback } from "grammy";
 import statusHandler from "./status";
 import setupHandler from "./setup";
 
+// Add the global error handler for unhandled promise rejections
+process.on("unhandledRejection", (reason, promise) => {
+  console.error("Unhandled Rejection:", reason);
+  // Optionally: log the promise that was rejected
+  console.error("Promise:", promise);
+});
+
+const port = process.env.PORT || 3000;
+
 const app = express();
 
 // Middleware to parse JSON and URL-encoded data
@@ -48,6 +57,8 @@ app.get("/setup", setupHandler);
 // Optional health check route (no IP restriction)
 app.get("/", statusHandler);
 
-app.listen();
+app.listen(port, () => {
+  console.log(`Server listening on port ${port}`);
+});
 
 export default app;
