@@ -32,7 +32,7 @@ export const sequelize = new Sequelize(
       acquire: 30000, // Maximum time (in ms) to try getting a connection before throwing an error
       idle: 10000, // Time (in ms) after which an idle connection is released back to the pool
     },
-    logging: process.env.log === "debug",
+    logging: process.env.log === "debug" ? console.log : false,
   }
 );
 
