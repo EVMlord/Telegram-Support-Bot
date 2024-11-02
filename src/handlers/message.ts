@@ -3,6 +3,7 @@ import { MyContext } from "../types";
 import { actionsMenu } from "../keyboards/userActions";
 import bot from "../bot";
 import { logger } from "../helpers/logger"; // Optional: Add logger for better debugging
+import { projectUsername } from "..";
 
 const SUPPORT_CHAT_ID = process.env.SUPPORT_CHAT_ID;
 
@@ -18,9 +19,7 @@ messageToSupport.use(actionsMenu);
 messageToSupport.on("message", async (ctx) => {
   try {
     // Check if the user is blacklisted
-    const isBlacklisted = await ctx.db.Blacklist.findOne({
-      where: { telegram_id: ctx.chat?.id },
-    });
+    const isBlacklisted = await ctx.db.Blacklist.isBlacklisted(ctx.chat?.id);
     if (isBlacklisted) return;
 
     // Forward the message to the support chat
@@ -32,7 +31,7 @@ messageToSupport.on("message", async (ctx) => {
               text: `${ctx.from?.first_name} ${ctx.from?.last_name ?? ""}`,
               url: ctx.from?.username
                 ? `https://t.me/${ctx.from.username}`
-                : "https://t.me/EVMlord",
+                : `https://t.me/${projectUsername}`,
             },
           ],
         ],
@@ -40,11 +39,11 @@ messageToSupport.on("message", async (ctx) => {
     });
 
     // Save message details to the database
-    await ctx.db.Messages.create({
-      original_id: ctx.message!.message_id,
-      support_id: supportMessage.message_id,
-      user_id: ctx.message!.chat.id,
-    });
+    await ctx.db.Messages.create(
+      ctx.message!.message_id,
+      supportMessage.message_id,
+      ctx.message!.chat.id
+    );
 
     // React to the user's message to confirm receipt
     await ctx.react("💯");
@@ -64,9 +63,9 @@ messageToUser.on("message", async (ctx) => {
       return;
 
     // Find the original message in the database
-    const original = await ctx.db.Messages.findOne({
-      where: { support_id: ctx.message?.reply_to_message?.message_id },
-    });
+    const original = await ctx.db.Messages.findBySupportId(
+      ctx.message?.reply_to_message?.message_id
+    );
 
     if (!original) {
       return await ctx.reply(ctx.t("error.not_found"));

@@ -11,9 +11,8 @@ async function findUser(ctx: MyContext) {
     return null;
   }
 
-  const message = await ctx.db.Messages.findOne({
-    where: { support_id: ctx.message?.reply_to_message.message_id },
-  });
+  const supportId = ctx.message.reply_to_message.message_id;
+  const message = await ctx.db.Messages.findBySupportId(supportId);
 
   if (!message) {
     await ctx.reply(ctx.t("error.not_found"));
@@ -26,7 +25,7 @@ async function findUser(ctx: MyContext) {
 ban.command("ban", async (ctx: MyContext) => {
   const message = await findUser(ctx);
   if (message) {
-    await ctx.db.Blacklist.create({ telegram_id: message.user_id });
+    await ctx.db.Blacklist.add(message.user_id);
     await ctx.reply(ctx.t("ban.done"));
   }
 });
@@ -34,7 +33,7 @@ ban.command("ban", async (ctx: MyContext) => {
 ban.command("pardon", async (ctx: MyContext) => {
   const message = await findUser(ctx);
   if (message) {
-    await ctx.db.Blacklist.destroy({ where: { telegram_id: message.user_id } });
+    await ctx.db.Blacklist.remove(message.user_id);
     await ctx.reply(ctx.t("ban.pardon"));
   }
 });

@@ -1,5 +1,4 @@
 import { Api, Context } from "grammy";
-import { ModelStatic } from "sequelize";
 
 import { I18nFlavor } from "@grammyjs/i18n";
 
@@ -8,8 +7,8 @@ import { Blacklist } from "./database/models/blacklist";
 
 interface MyDb {
   db: {
-    Messages: ModelStatic<Messages>;
-    Blacklist: ModelStatic<Blacklist>;
+    Messages: typeof Messages;
+    Blacklist: typeof Blacklist;
   };
 }
 

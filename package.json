@@ -8,11 +8,12 @@
   "scripts": {
     "start": "node dist/api/bot.js",
     "build": "tsc && cpx \"src/locales/**/*\" dist/src/locales",
-    "dev": "ts-node api/bot.ts"
+    "dev": "ts-node api/bot.ts",
+    "testdb": "ts-node src/database/testConnection.ts"
   },
   "devDependencies": {
     "@types/express": "^5.0.0",
-    "@types/node": "^22.8.1",
+    "@types/node": "^22.8.6",
     "cpx": "^1.5.0",
     "ts-node": "^10.9.2"
   },
@@ -28,8 +29,6 @@
     "grammy": "^1.30.0",
     "ip-range-check": "^0.2.0",
     "mysql2": "^3.11.3",
-    "sequelize": "^6.37.5",
-    "sequelize-typescript": "^2.1.6",
     "typescript": "^5.6.3",
     "winston": "^3.15.0"
   }
