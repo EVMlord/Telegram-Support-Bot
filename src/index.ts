@@ -13,6 +13,9 @@ export const projectUsername = process.env.PROJECT_USERNAME || "";
 
 async function initBot() {
   try {
+    // Configure bot to parse HTML in messages
+    bot.api.config.use(parseMode("HTML"));
+
     // Setup database first
     await setupDatabase();
     logger.info("Database initialized and models synced successfully.");
@@ -25,9 +28,6 @@ async function initBot() {
 
     // Register bot commands
     await setupBotCommands(bot);
-
-    // Configure bot to parse HTML in messages
-    bot.api.config.use(parseMode("HTML"));
 
     // Conditionally start bot with long polling in development
     if (process.env.NODE_ENV === "development") {
